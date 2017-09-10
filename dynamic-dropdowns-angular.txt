@@ -1,0 +1,29 @@
+
+
+val site = z.select("siteid",getSite()).asInstanceOf[String]
+val names: Array[(String,String)] = sqlContext.sql("select siteid,sitename from testdb.sites").collect.map(x => (x(0).asInstanceOf[String],x(1).toString.asInstanceOf[String]))
+z.angularBind("selectedName",z.select("Wind Sites",names))
+println("%angular <h2><br>you selected : {{selectedName}}</h2>")
+
+
+Form created by Angular interpreter
+
+%angular
+
+<form>
+ <h1> Commercial Renewables Wind Reports </h1>
+ <div class="form-group">
+	<br>Site ID:<br>
+    <select ng-model="site.id" ng-options={{sites}}>
+    <option value="LosVientos">Los Vientos
+	<option value="HappyJack">Happy Jack
+    </select>
+    <br>ReportDuration:<br>
+    <select ng-model="report.duration">
+    <option value="select here">select
+    </select>
+    <br><br>
+    <button type="submit" class="btn btn-primary" ng-click="reset()">GetReport</button>
+ </div>
+</form> 
+
